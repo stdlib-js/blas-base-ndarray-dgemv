@@ -1,4 +1,4 @@
-/**
+/*
 * @license Apache-2.0
 *
 * Copyright (c) 2026 The Stdlib Authors.
@@ -16,19 +16,34 @@
 * limitations under the License.
 */
 
-'use strict';
+// TypeScript Version: 4.1
+
+/// <reference types="https://cdn.jsdelivr.net/gh/stdlib-js/types@esm/index.d.ts"/>
+
+import { float64ndarray, ndarray } from '@stdlib/types/ndarray';
 
 /**
-* BLAS level 2 routine to perform one of the matrix-vector operations `y = alpha*A*x + beta*y` or `y = alpha*A^T*x + beta*y`.
+* Performs one of the matrix-vector operations `y = alpha*A*x + beta*y` or `y = alpha*A^T*x + beta*y`, where `alpha` and `beta` are scalars, `x` and `y` are one-dimensional ndarrays, and `A` is an `M` by `N` matrix.
 *
-* @module @stdlib/blas-base-ndarray-dgemv
+* ## Notes
+*
+* -   The function expects the following ndarrays:
+*
+*     -   a two-dimensional input ndarray corresponding to `A`.
+*     -   a one-dimensional input ndarray corresponding to `x`.
+*     -   a one-dimensional input/output ndarray corresponding to `y`.
+*     -   a zero-dimensional ndarray specifying whether `A` should be transposed, conjugate-transposed, or not transposed.
+*     -   a zero-dimensional ndarray containing a scalar constant corresponding to `alpha`.
+*     -   a zero-dimensional ndarray containing a scalar constant corresponding to `beta`.
+*
+* @param arrays - array-like object containing ndarrays
+* @returns output ndarray
 *
 * @example
 * var Float64Matrix = require( '@stdlib/ndarray-matrix-float64' );
 * var Float64Vector = require( '@stdlib/ndarray-vector-float64' );
 * var scalar2ndarray = require( '@stdlib/ndarray-from-scalar' );
 * var resolveEnum = require( '@stdlib/blas-base-transpose-operation-resolve-enum' );
-* var dgemv = require( '@stdlib/blas-base-ndarray-dgemv' );
 *
 * var A = new Float64Matrix( [ [ 1.0, 2.0, 3.0 ], [ 4.0, 5.0, 6.0 ] ] );
 * var x = new Float64Vector( [ 1.0, 2.0, 3.0 ] );
@@ -44,18 +59,15 @@
 *     'dtype': 'float64'
 * });
 *
-* var out = dgemv( [ A, x, y, trans, alpha, beta ] );
+* var z = dgemv( [ A, x, y, trans, alpha, beta ] );
 * // returns <ndarray>[ 18.0, 37.0 ]
 *
-* var bool = ( out === y );
+* var bool = ( z === y );
 * // returns true
 */
-
-// MODULES //
-
-var main = require( './main.js' );
+declare function dgemv( arrays: [ float64ndarray, float64ndarray, float64ndarray, ndarray, float64ndarray, float64ndarray ] ): float64ndarray;
 
 
 // EXPORTS //
 
-module.exports = main;
+export = dgemv;
